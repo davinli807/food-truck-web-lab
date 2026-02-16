@@ -45,8 +45,8 @@ public class App {
             html += "<p><b>Drink:</b> ";
             html += "<select name='drink' required>";
             html += "<option value='' disabled selected>-- Select a drink --</option>";
-            html += "<option value='drink_milk'>Milk ($3.00)</option>";
-            html += "<option value='drink_coffee'>Coffee ($2.50)</option>";
+            html += "<option value='drink_milk'>Milk ($3.25)</option>";
+            html += "<option value='drink_coffee'>Coffee ($3.00)</option>";
             html += "<option value='drink_water'>Water ($1.50)</option>";
             html += "<option value='drink_lemonade'>Lemonade ($2.75)</option>";
             html += "<option value='drink_icedtea'>Iced Tea ($2.50)</option>";
@@ -67,6 +67,9 @@ public class App {
             String sandwichCode = req.queryParams("sandwich");
             String drinkCode = req.queryParams("drink");
 
+            // Debug: log incoming codes
+            System.out.println("/order called with: salad=" + saladCode + ", sandwich=" + sandwichCode + ", drink=" + drinkCode);
+
             // If any are missing, show an error message
             if (saladCode == null || sandwichCode == null || drinkCode == null ||
                 saladCode.equals("") || sandwichCode.equals("") || drinkCode.equals("")) {
@@ -81,6 +84,8 @@ public class App {
             MenuItem salad = menu.getItem(saladCode);
             MenuItem sandwich = menu.getItem(sandwichCode);
             MenuItem drink = menu.getItem(drinkCode);
+
+            System.out.println("menu.has(salad)=" + (salad != null) + ", has(sandwich)=" + (sandwich != null) + ", has(drink)=" + (drink != null));
 
             // Safety check in case code does not exist
             if (salad == null || sandwich == null || drink == null) {
